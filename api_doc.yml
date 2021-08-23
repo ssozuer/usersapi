@@ -1,0 +1,112 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  ObjectID:
+    items:
+      format: uint8
+      type: integer
+    title: ObjectID is the BSON ObjectID type.
+    type: array
+    x-go-package: go.mongodb.org/mongo-driver/bson/primitive
+host: localhost:8080
+info:
+  contact:
+    email: selcuk.sozuer@gmail.com
+  description: This is a sample user service API.
+  title: User Service API
+  version: 1.0.0
+paths:
+  /login:
+    post:
+      description: Logins the user
+      operationId: login
+      parameters:
+      - in: query
+        name: email
+        type: string
+        x-go-name: Email
+      - in: query
+        name: password
+        type: string
+        x-go-name: Password
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid input
+  /users:
+    get:
+      description: Returns list of users
+      operationId: listUsers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful operation
+      tags:
+      - users
+    post:
+      description: Create a new user
+      operationId: newUser
+      parameters:
+      - $ref: '#/definitions/ObjectID'
+        in: query
+        name: id
+        x-go-name: ID
+      - in: query
+        name: firstname
+        type: string
+        x-go-name: FirstName
+      - in: query
+        name: lastname
+        type: string
+        x-go-name: LastName
+      - in: query
+        name: email
+        type: string
+        x-go-name: Email
+      - in: query
+        name: password
+        type: string
+        x-go-name: Password
+      - format: date-time
+        in: query
+        name: created
+        type: string
+        x-go-name: Created
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid input
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      description: Delete an existing user
+      operationId: deleteUser
+      parameters:
+      - description: ID of the user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: Invalid user ID
+      tags:
+      - users
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
