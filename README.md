@@ -67,10 +67,3 @@ REDIS_PASSWORD=""
 docker build -t userapi .
 docker run -p 8080:8080 userapi
 ```
-
-RUN export JWT_SECRET=VERY_SECRET_KEY
-RUN export MONGO_URI mongodb://admin:password&localhost:27017/test?authSource=admin
-RUN export MONGO_DATABASE users_db
-RUN export USERS_COLLECTION users
-RUN export REDIS_URI localhost:6379
-RUN export REDIS_PASSWORD
